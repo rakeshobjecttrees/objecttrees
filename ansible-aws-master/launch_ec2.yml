@@ -1,0 +1,22 @@
+---  
+- hosts: localhost  
+  connection: local  
+  gather_facts: no    
+  vars:  
+    #your region  
+    region: ap-south-1    
+  tasks:  
+    - name: EC2 basic provisioning  
+      ec2:
+        region: "{{ region }}"  
+        key_name: raghu
+        instance_type: t2.micro  
+        image: 	 ami-b46f48db
+        wait: yes    
+        group: sg_webserver
+        instance_tags:  
+          group: webserver  
+        exact_count: 1 
+        count_tag:  
+          group: webserver
+        
